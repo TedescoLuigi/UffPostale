@@ -5,109 +5,159 @@
         static void Main(string[] args)
         {
             bool ciclo = true;
-            while (ciclo = true)
+
+            // LISTE 
+            List<string> spedizioni = new List<string>();
+            List<string> finanza = new List<string>();
+            List<string> spid = new List<string>();
+
+            while (ciclo)
             {
                 Console.WriteLine("BENVENUTI ALL UFFICIO POSTALE");
-                Console.WriteLine("--------------------------------");
-                Console.WriteLine("Premere 1 - ACCETTAZIONE ");
-                Console.WriteLine("Premere 2 - SERVIZI");
-                Console.WriteLine("Premere 3 - CHIUSURA UFFICIO");
-                Console.WriteLine("--------------------------------");
+                Console.WriteLine("1 - ACCETTAZIONE");
+                Console.WriteLine("2 - SERVI CLIENTE");
+                Console.WriteLine("3 - CHIUSURA UFFICIO");
 
-                
-                int inputMenuA = Convert.ToInt32(Console.ReadLine());
-                if (inputMenuA == 1)
+                int scelta = Convert.ToInt32(Console.ReadLine());
+
+                // ACCETTAZIONE 
+                if (scelta == 1)
                 {
-                    List<string> nomi = new List<string>();
-                    int eta = 0;
-                    string input;
-                    Console.WriteLine("INSERISCI IL NOME");
-                    input = Console.ReadLine();
-                   
-                    Console.WriteLine("--------------------------------");
-                    Console.WriteLine("INSERISCI ETA");
-                    eta = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("--------------------------------");
-                    Console.WriteLine("A QUALE SERVIZIO VUOLE ACCEDERE");
-                    Console.WriteLine("Premere 1 - SPEDIZIONI");
-                    Console.WriteLine("Premere 2 - FINANZA");
-                    Console.WriteLine("Premere 3 - SPID");
-                    Console.WriteLine("--------------------------------");
-                    int inputMenuB = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Nome:");
+                    string nome = Console.ReadLine();
 
-                    if (eta < 65)//INSERISCI INFONDO ALLA LISTA
+                    Console.WriteLine("Età:");
+                    int eta = Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine("Servizio:");
+                    Console.WriteLine("1 - Spedizioni");
+                    Console.WriteLine("2 - Finanza");
+                    Console.WriteLine("3 - SPID");
+
+                    int servizio = Convert.ToInt32(Console.ReadLine());
+
+
+
+                    if (servizio == 1)
                     {
-                        if (inputMenuB == 1)
+                        if (eta < 65)
                         {
-                            List<string> spedizioni = new List<string>();
-                            nomi.Add(input);
-                            Console.WriteLine("hai aggiunto correttamente l'utente " + nomi + "alla lista spedizioni in fondo ");
-
+                            spedizioni.Add(nome);
+                            Console.WriteLine($"Cliente {nome} aggiunto in fondo alla coda Spedizioni (posizione {spedizioni.Count})");
                         }
-                        else if (inputMenuB == 2)
+                        else
                         {
-                            List<string> finanza = new List<string>();
-                            nomi.Add(input);
-                            Console.WriteLine("hai aggiunto correttamente l'utente" + nomi + "alla lista finanza in fondo ");
-
-                        }
-                        else if (inputMenuB == 3)
-                        {
-                            List<string> spid = new List<string>();
-                            nomi.Add(input);
-                            Console.WriteLine("hai aggiunto correttamente l'utente" + nomi + "alla lista spid in fondo");
-
+                            spedizioni.Insert(spedizioni.Count / 2, nome);
+                            Console.WriteLine($"Cliente {nome} inserito a meta della coda Spedizioni (posizione {spedizioni.Count / 2})");
                         }
                     }
-                    else if(eta > 65)//INSERICI A META DELLA LISTA 
+                    else if (servizio == 2)
                     {
-                        if (inputMenuB == 1)
+                        if (eta < 65)
                         {
-                            List<string> spedizioni = new List<string>();
-                            spedizioni.Insert(spedizioni.Count/2, input);
-
-
+                            finanza.Add(nome);
+                            Console.WriteLine($"Cliente {nome} aggiunto in fondo alla coda Finanza (posizione {finanza.Count})");
                         }
-                        else if (inputMenuB == 2)
+                        else
                         {
-                            List<string> finanza = new List<string>();
-                            finanza.Insert(finanza.Count / 2, input);
-
-
-                        }
-                        else if (inputMenuB == 3)
-                        {
-                            List<string> spid = new List<string>();
-                            spid.Insert(spid.Count / 2, input);
-
+                            finanza.Insert(finanza.Count / 2, nome);
+                            Console.WriteLine($"Cliente {nome} inserito a meta della coda Finanza (posizione {finanza.Count / 2})");
                         }
                     }
-                   
-
-
-
+                    else if (servizio == 3)
+                    {
+                        if (eta < 65)
+                        {
+                            spid.Add(nome);
+                            Console.WriteLine($"Cliente {nome} aggiunto in fondo alla coda SPID (posizione {spid.Count})");
+                        }
+                        else
+                        {
+                            spid.Insert(spid.Count / 2, nome);
+                            Console.WriteLine($"Cliente {nome} inserito a meta della coda SPID (posizione {spid.Count / 2})");
+                        }
+                    }
                 }
-                else if (inputMenuA == 2)
+
+                // SERVI CLIENTE 
+                else if (scelta == 2)
                 {
-                    /*PRENDERE IL PRIMO DELLA ODA E SERVIRLO E ELIMINARLO DALLA LISTA CON REMOVE Il sistema deve chiamare
-                     * il prossimo cliente in attesa per quello specifico sportello, mostrare il suo nome a video e rimuoverlo dalla fila.*/
+                    Console.WriteLine("Quale sportello?");
+                    Console.WriteLine("1 - Spedizioni");
+                    Console.WriteLine("2 - Finanza");
+                    Console.WriteLine("3 - SPID");
 
+                    int sportello = Convert.ToInt32(Console.ReadLine());
+
+                    if (sportello == 1)
+                    {
+                        if (spedizioni.Count > 0)
+                        {
+                            Console.WriteLine("Servito: " + spedizioni[0]);
+                            spedizioni.RemoveAt(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Coda vuota!");
+                        }
+                    }
+
+                    else if (sportello == 2)
+                    {
+                        if (finanza.Count > 0)
+                        {
+                            Console.WriteLine("Servito: " + finanza[0]);
+                            finanza.RemoveAt(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Coda vuota!");
+                        }
+                    }
+
+                    else if (sportello == 3)
+                    {
+                        if (spid.Count > 0)
+                        {
+                            Console.WriteLine("Servito: " + spid[0]);
+                            spid.RemoveAt(0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Coda vuota!");
+                        }
+                    }
                 }
-                else if (inputMenuA == 3)
+
+                //  CHIUSURA POSTE
+                else if (scelta == 3)
                 {
+                    Console.WriteLine("Chiusura..................");
 
-                    /*Chiusura Ufficio 
-                    L'ufficio chiude le porte e non accetta più nuovi clienti, ma il programma non può terminare bruscamente se c'è ancora gente all'interno.
-                    Il sistema deve simulare lo smaltimento rapido degli ultimi clienti presenti, chiamando e rimuovendo automaticamente i clienti rimasti, svuotando
-                    prima la coda Spedizioni, poi la Finanziaria e infine lo SPID.
-                    Solo quando nell'ufficio non ci sarà più nessun cliente in attesa in nessuna delle tre code, il programma stamperà un messaggio di chiusura definitiva 
-                    e l'esecuzione terminerà.*/
+                    // svuota spedizioni
+                    while (spedizioni.Count > 0)
+                    {
+                        Console.WriteLine("Servito: " + spedizioni[0]);
+                        spedizioni.RemoveAt(0);
+                    }
 
+                    // svuota finanza
+                    while (finanza.Count > 0)
+                    {
+                        Console.WriteLine("Servito: " + finanza[0]);
+                        finanza.RemoveAt(0);
+                    }
 
+                    // svuota spid
+                    while (spid.Count > 0)
+                    {
+                        Console.WriteLine("Servito: " + spid[0]);
+                        spid.RemoveAt(0);
+                    }
 
+                    Console.WriteLine("UFFICIO CHIUSO");
+                    ciclo = false;
                 }
-
-
             }
         }
     }
