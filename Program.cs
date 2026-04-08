@@ -41,18 +41,21 @@
                         {
                             List<string> spedizioni = new List<string>();
                             nomi.Add(input);
+                            Console.WriteLine("hai aggiunto correttamente l'utente " + nomi + "alla lista spedizioni in fondo ");
 
                         }
                         else if (inputMenuB == 2)
                         {
                             List<string> finanza = new List<string>();
                             nomi.Add(input);
+                            Console.WriteLine("hai aggiunto correttamente l'utente" + nomi + "alla lista finanza in fondo ");
 
                         }
                         else if (inputMenuB == 3)
                         {
                             List<string> spid = new List<string>();
                             nomi.Add(input);
+                            Console.WriteLine("hai aggiunto correttamente l'utente" + nomi + "alla lista spid in fondo");
 
                         }
                     }
@@ -61,19 +64,21 @@
                         if (inputMenuB == 1)
                         {
                             List<string> spedizioni = new List<string>();
-                            nomi.Add(input);
+                            spedizioni.Insert(spedizioni.Count/2, input);
+
 
                         }
                         else if (inputMenuB == 2)
                         {
                             List<string> finanza = new List<string>();
-                            nomi.Add(input);
+                            finanza.Insert(finanza.Count / 2, input);
+
 
                         }
                         else if (inputMenuB == 3)
                         {
                             List<string> spid = new List<string>();
-                            nomi.Add(input);
+                            spid.Insert(spid.Count / 2, input);
 
                         }
                     }
